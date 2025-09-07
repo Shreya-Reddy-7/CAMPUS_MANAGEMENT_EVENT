@@ -1,39 +1,34 @@
 # Campus Event Management
 
-A lightweight **Campus Event Management Platform** that allows colleges to create events, and students to register, give feedback, and view reports.
+A simple Campus Event Management System for colleges to create events, and students to register, complete feedback and view reports. 
 
+# Features 
+Admin Portal (Web) 
+-create and manage events (Hackathons, Workshops, Fests, etc..)
+-generate reports (event popularity, student activity, average feedback) 
+Student App (Web/Mobile) 
+-browse upcoming events 
+-register for events 
+-complete feedback after attending 
 
-## Features
-
-- **Admin Portal (Web)**  
-  - Create and manage events (Hackathons, Workshops, Fests, etc.).  
-  - Generate reports (event popularity, student activity, average feedback).  
-
-- **Student App (Web/Mobile)**  
-  - Browse upcoming events.  
-  - Register for events.  
-  - Submit feedback after attending.  
-
-
-## 🗂️ Project Structure
-```CAMPUS_MANAGEMENT_EVENT/
-│── app.py # Main Flask app
-│── reset_db.py # Script to reset database
-│── requirements.txt # Python dependencies
-│── events.db # SQLite database
-│── design_doc.md # Design documentation
+ # 🗂️ Project Structure 
+```│── app.py # main flask app 
+│── reset_db.py # reset db script
+│── requirements.txt # python dependencies 
+│── events.db # sqlite db 
+│── design_doc.md # design documentation 
 │
-├── templates/ # HTML templates
-│ ├── index.html
-│ ├── admin.html
-│ └── student.html
-│
-├── static/ # Static files
+├── templates/ # html templates 
+│ ├── index.html 
+│ ├── admin.html 
+│ └── student.html 
+│ 
+├── static/ # static files 
 │ ├── css/
-│ │ └── style.css
+│ │ └── style.css 
 │ └── js/
-│ ├── admin.js
-│ ├── student.js
-│ └── auth.js
-│
-└── instance/ # Flask instance folder
+│ ├── admin.js 
+│ ├── student.js 
+│ └── auth.js 
+│ 
+└── instance/ # flask instance folder
