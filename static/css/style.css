@@ -1,0 +1,102 @@
+/* ---------- Global Styles ---------- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background: linear-gradient(to bottom right, #e0f7fa, #b2ebf2);
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #006064;
+    text-shadow: 1px 1px 2px #004d40;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #00796b;
+    margin-top: 20px;
+}
+
+/* ---------- Tables ---------- */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: #ffffffcc;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background: linear-gradient(to right, #004d40, #00796b);
+    color: white;
+    font-weight: bold;
+}
+
+/* ---------- Buttons ---------- */
+button {
+    padding: 8px 14px;
+    margin: 4px;
+    cursor: pointer;
+    background: linear-gradient(to right, #00796b, #004d40);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(to right, #004d40, #00796b);
+    transform: scale(1.05);
+}
+
+/* ---------- Forms ---------- */
+form {
+    background: #ffffffcc;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 6px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    max-width: 500px;
+}
+
+input[type="text"], input[type="number"] {
+    padding: 8px;
+    margin: 6px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 95%;
+    display: block;
+}
+
+/* ---------- Report Area ---------- */
+#report {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e0f2f1;
+    border: 1px solid #00796b;
+    border-radius: 6px;
+}
+
+/* ---------- Lists ---------- */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 8px;
+    margin: 4px 0;
+    background: linear-gradient(to right, #b2dfdb, #80cbc4);
+    border-radius: 4px;
+    color: #004d40;
+}

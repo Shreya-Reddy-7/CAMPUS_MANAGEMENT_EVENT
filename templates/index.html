@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Campus Event Management - Landing</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/auth.js') }}" defer></script>
+</head>
+<body>
+  <h1>Campus Event Management</h1>
+
+  <div id="authBox">
+    <h2>Login</h2>
+    <input id="email" placeholder="email" /><br><br>
+    <input id="password" type="password" placeholder="password" /><br><br>
+    <button id="btnLogin">Login</button>
+    <button id="btnGotoAdmin" onclick="location.href='/admin'">Go to Admin Portal</button>
+    <button id="btnGotoStudent" onclick="location.href='/student'">Go to Student App</button>
+    <p style="margin-top:12px">Seeded accounts: <strong>admin@demo/adminpass</strong>, <strong>alice@demo/alicepass</strong>, <strong>bob@demo/bobpass</strong></p>
+  </div>
+
+</body>
+</html>
