@@ -16,4 +16,24 @@ A lightweight **Campus Event Management Platform** that allows colleges to creat
 
 
 ## 🗂️ Project Structure
-
+```CAMPUS_MANAGEMENT_EVENT/
+│── app.py # Main Flask app
+│── reset_db.py # Script to reset database
+│── requirements.txt # Python dependencies
+│── events.db # SQLite database
+│── design_doc.md # Design documentation
+│
+├── templates/ # HTML templates
+│ ├── index.html
+│ ├── admin.html
+│ └── student.html
+│
+├── static/ # Static files
+│ ├── css/
+│ │ └── style.css
+│ └── js/
+│ ├── admin.js
+│ ├── student.js
+│ └── auth.js
+│
+└── instance/ # Flask instance folder
