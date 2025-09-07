@@ -1,4 +1,3 @@
-// auth.js - shared auth helpers
 const API_BASE = "http://127.0.0.1:5000";
 
 function saveToken(t) {
@@ -23,7 +22,6 @@ async function login(email, password) {
     return json;
 }
 
-// On landing page: hookup login button
 document.addEventListener("DOMContentLoaded", () => {
     const btnLogin = document.getElementById("btnLogin");
     if (btnLogin) {
@@ -40,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Attach logout button if present
     const btnLogout = document.getElementById("btnLogout");
     if (btnLogout) {
         btnLogout.addEventListener("click", () => {

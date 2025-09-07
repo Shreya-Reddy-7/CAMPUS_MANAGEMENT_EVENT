@@ -1,4 +1,3 @@
-// admin.js
 const API_BASE = "http://127.0.0.1:5000";
 
 async function fetchJson(url, opts) {

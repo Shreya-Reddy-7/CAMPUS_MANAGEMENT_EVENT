@@ -16,21 +16,18 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = datetime.timedelta(hours=8)
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
 
-# ==========================
-# MODELS
-# ==========================
+
 class College(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
 
 class User(db.Model):
-    # For authentication (admins + students)
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True, nullable=False)
     password_hash = db.Column(db.String(200), nullable=False)
     role = db.Column(db.String(20), nullable=False)  # 'admin' or 'student'
     student_id = db.Column(db.Integer, db.ForeignKey("student.id"), nullable=True)
-    # if role == 'student', link to Student row
+    
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -72,9 +69,6 @@ class Feedback(db.Model):
     rating = db.Column(db.Integer)
     comments = db.Column(db.String(300))
 
-# ==========================
-# DB SETUP (seed)
-# ==========================
 def ensure_db():
     with app.app_context():
         db.create_all()
@@ -83,19 +77,16 @@ def ensure_db():
             db.session.add(c)
             db.session.commit()
 
-            # students
             s1 = Student(name="Alice", college=c)
             s2 = Student(name="Bob", college=c)
             db.session.add_all([s1, s2])
             db.session.commit()
 
-            # events
             e1 = Event(title="AI Workshop", type="Workshop", capacity=100, college=c)
             e2 = Event(title="HackWithInfy", type="Hackathon", capacity=200, college=c)
             db.session.add_all([e1, e2])
             db.session.commit()
 
-            # create user accounts (admin + students)
             admin_user = User(email="admin@demo", role="admin")
             admin_user.set_password("adminpass")
             db.session.add(admin_user)
@@ -107,9 +98,7 @@ def ensure_db():
             db.session.add_all([user_a, user_b])
             db.session.commit()
 
-# ==========================
-# HELPERS
-# ==========================
+
 def json_success(data=None, message=None):
     resp = {"success": True}
     if data is not None:
@@ -122,15 +111,11 @@ def json_error(msg, code=400):
     return jsonify({"success": False, "error": msg}), code
 
 def role_required(role):
-    # decorator-like helper inside function endpoints
     def inner_check():
         claims = get_jwt()
         return claims.get("role") == role
     return inner_check
 
-# ==========================
-# AUTH (register/login)
-# ==========================
 @app.route("/auth/register", methods=["POST"])
 def register_user():
     data = request.get_json() or {}
@@ -149,7 +134,6 @@ def register_user():
     user.set_password(password)
 
     if role == "student":
-        # create student row
         college_id = data.get("college_id") or 1
         student = Student(name=name or email.split("@")[0], college_id=college_id)
         db.session.add(student)
@@ -179,9 +163,6 @@ def login_user():
     token = create_access_token(identity=user.email, additional_claims=additional_claims)
     return json_success(data={"access_token": token, "role": user.role, "student_id": user.student_id})
 
-# ==========================
-# ROUTES (public + protected)
-# ==========================
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -232,11 +213,9 @@ def create_event():
 @jwt_required()
 def register_event(event_id):
     claims = get_jwt()
-    # allow student or admin to register (admin may register on behalf)
     data = request.get_json() or {}
     student_id = data.get("student_id")
     if claims.get("role") == "student" and not student_id:
-        # logged in student registers self
         student_id = claims.get("student_id")
     if not student_id:
         return json_error("student_id required", 400)
@@ -275,7 +254,6 @@ def mark_attendance():
     event_id = data.get("event_id")
     if not student_id or not event_id:
         return json_error("student_id and event_id required", 400)
-    # ensure registration exists
     if not Registration.query.filter_by(student_id=student_id, event_id=event_id).first():
         return json_error("not registered", 400)
     if Attendance.query.filter_by(student_id=student_id, event_id=event_id).first():
@@ -302,9 +280,6 @@ def give_feedback():
     db.session.commit()
     return json_success(data={"feedback_id": fb.id}, message="feedback submitted")
 
-# -----------------------
-# REPORTS
-# -----------------------
 @app.route("/reports/event_popularity", methods=["GET"])
 @jwt_required(optional=True)
 def event_popularity():
@@ -391,9 +366,6 @@ def inactive_students():
     data = [{"student_id": s.id, "name": s.name} for s in results]
     return json_success(data=data)
 
-# ==========================
-# MAIN
-# ==========================
 if __name__ == "__main__":
     ensure_db()
     app.run(debug=True)

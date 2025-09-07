@@ -1,4 +1,3 @@
-// student.js
 const API_BASE = "http://127.0.0.1:5000";
 
 async function fetchJson(url, opts) {
@@ -27,7 +26,6 @@ async function loadEvents() {
 async function register(eventId) {
     const token = localStorage.getItem("access_token");
     if (!token) { alert("Login first"); return; }
-    // let student_id be from token claims ideally; we'll prompt for demo
     const student_id = prompt("Enter your student ID (or leave blank to use your account)");
     const payload = {};
     if (student_id) payload.student_id = parseInt(student_id, 10);

@@ -1,0 +1,21 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environment
+venv/
+ENV/
+env/
+
+# Ignore IDE/project files
+*.vscode/
+*.idea/
+
+# Ignore database (optional, if you don’t want to share test data)
+*.db
+
+# Ignore system files
+.DS_Store
+Thumbs.db
